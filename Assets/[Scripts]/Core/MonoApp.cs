@@ -54,6 +54,7 @@ namespace Serjbal.App
             //inject
             _app.StateMachine.AddState(new InjectAppToServicesState(_app, _appInjector));
             _app.StateMachine.AddState(new InjectServicesToServicesState(_app, _appInjector));
+            _app.StateMachine.AddState(new InjectAppToPrefabsState(_app, _appInjector));
 
             //init
             _app.StateMachine.AddState(new InitAppServicesState(_app));
@@ -78,10 +79,10 @@ namespace Serjbal.App
 
         protected virtual void ExecuteInitStates()
         {
-            //inject app
+            //inject
             _app.StateMachine.SwitchToState<InjectAppToServicesState>().Execute();
-            //inject services
             _app.StateMachine.SwitchToState<InjectServicesToServicesState>().Execute();
+            _app.StateMachine.SwitchToState<InjectAppToPrefabsState>().Execute();
             //init
             _app.StateMachine.SwitchToState<InitAppServicesState>().Execute();
         }

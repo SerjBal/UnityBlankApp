@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c2e853394db40c4a19b08985450c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Serjbal.Page
+  _viewModel: {fileID: 11400000, guid: 60a3480395e0b4d508ae6a89e704d0af, type: 2}
 --- !u!1 &6302333518173102671
 GameObject:
   m_ObjectHideFlags: 0

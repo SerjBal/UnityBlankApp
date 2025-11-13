@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086aa262b7d9647f1aa34839587fbe15, type: 3}
   m_Name: App Settings
   m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.AppSettings
-  pagePrefabs: {fileID: 11400000, guid: 1fb9bf1fdeb6f43c282cfadf89e6cbfc, type: 2}
+  pageViewPrefabs: {fileID: 11400000, guid: 1fb9bf1fdeb6f43c282cfadf89e6cbfc, type: 2}
   config:
     version: 1.0.0
     language: en

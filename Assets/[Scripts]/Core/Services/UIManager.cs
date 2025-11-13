@@ -6,20 +6,18 @@ using Serjbal.App.Factorys;
 
 namespace Serjbal.App
 {
-    public class UIService : MonoBehaviour, IService
+    public class UIManager : MonoBehaviour, IService
     {
         [SerializeField] Canvases _canvases;
-
-        private readonly Dictionary<string, IViewable> _openedPages = new Dictionary<string, IViewable>();
-        private SimplePagesFactory _factory;
+        PagesFactory _pagesFactory;
+        readonly Dictionary<string, IViewable> _openedPages = new Dictionary<string, IViewable>();
 
         [InjectDependency] App _app;
 
 
         public void Init()
         {
-            _factory = new SimplePagesFactory(_app, _canvases);
-           // _app.EventBus.Subscribe<>():
+            _pagesFactory = new PagesFactory(_app.Settings.pageViewPrefabs.Prefabs, _canvases);
         }
 
         public void ShowPage(PageType pageType) => GetPage(pageType).Show();
@@ -33,15 +31,15 @@ namespace Serjbal.App
             if (_openedPages.ContainsKey(pageName))
                 return _openedPages[pageName];
 
-            var newPage = _factory.Create(pageType);
+            var newPage = _pagesFactory.Create(pageType);
             _openedPages.Add(pageName, newPage);
-
+                
             return newPage;
         }
 
         public void DestroyPage(IViewable page)
         {
-            var pageGO = page.gameObject;
+            var pageGO = page.GameObject;
             var pageGO_name = pageGO.name;
 
             if (_openedPages.ContainsKey(pageGO_name))
@@ -50,12 +48,13 @@ namespace Serjbal.App
             Destroy(pageGO);
         }
 
-        public bool IsPageExist(string name, out IViewable page)
+        public bool IsPageExist(PageType pageType, out IViewable page)
         {
+            var pageName = pageType.ToString();
             page = null;
-            bool has = _openedPages.ContainsKey(name);
+            bool has = _openedPages.ContainsKey(pageName);
             if (has)
-                page = _openedPages[name];
+                page = _openedPages[pageName];
 
             return has;
         }

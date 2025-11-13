@@ -5,7 +5,7 @@ namespace Serjbal.App
     [CreateAssetMenu]
     public class AppSettings : ScriptableObject
     {
-        public PrefabRepository pagePrefabs;
+        public PrefabRepository pageViewPrefabs;
         public AppSettingsModel config;
     }
 }

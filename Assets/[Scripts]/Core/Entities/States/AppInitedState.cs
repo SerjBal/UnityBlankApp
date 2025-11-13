@@ -11,7 +11,7 @@
 
         public override bool Execute()
         {
-            var ui = (UIService)_app.ServiceContainer.GetService(typeof(UIService));
+            var ui = (UIManager)_app.ServiceContainer.GetService(typeof(UIManager));
             ui.ShowPage(UI.PageType.MainPage);
             return true;
         }

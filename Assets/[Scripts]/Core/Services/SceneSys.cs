@@ -13,7 +13,7 @@ namespace Serjbal.App
         Scene _currentScene;
         int _currentSceneIndex;
 
-        [InjectDependency] UIService _uiService;
+        [InjectDependency] UIManager _uiManager;
 
         public void Init()
         {
@@ -31,7 +31,7 @@ namespace Serjbal.App
             }
             SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
 
-            _uiService.ShowPage(PageType.LoaderPage);
+            _uiManager.ShowPage(PageType.LoaderPage);
         }
 
 
@@ -48,7 +48,7 @@ namespace Serjbal.App
                 _currentScene.Init();
                 OnSceneLoadFinish?.Invoke();
 
-                _uiService.ClosePage(PageType.LoaderPage);
+                _uiManager.ClosePage(PageType.LoaderPage);
             }
         }
 

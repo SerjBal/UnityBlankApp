@@ -22,8 +22,5 @@ namespace Serjbal.App
 
             return true;
         }
-
-        public override bool Enter() => true;
-        public override bool Exit() => true;
     }
 }
