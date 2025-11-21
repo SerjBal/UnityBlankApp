@@ -45,7 +45,10 @@ namespace Serjbal.App
             _app.ServiceContainer.AddService(new SettingsStorage(jsonSettingsStorage));
             _app.ServiceContainer.AddService(new SceneSys());
 
-            _staticServices.ForEach(services => _app.ServiceContainer.AddService(services));
+            foreach (var service in _staticServices)
+            {
+                _app.ServiceContainer.AddService(service.GetType(), service);
+            }
         }
 
         protected virtual void AddStates()

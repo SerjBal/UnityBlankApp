@@ -14,8 +14,6 @@ namespace Serjbal.App
 
 		void AddService(object serviceInstance);
 
-		void AddService(MonoBehaviour serviceInstance);
-
 		void AddService<T>(ServiceContainerCallback callback) where T : class;
 
 		void AddService<T>(T serviceInstance) where T : class;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Serjbal.App.Utils;
 
 namespace Serjbal.App
 {
@@ -48,15 +48,6 @@ namespace Serjbal.App
         }
 
         public void AddService(object serviceInstance)
-        {
-            if (serviceInstance == null)
-                throw new ArgumentNullException(nameof(serviceInstance));
-
-            var serviceType = serviceInstance.GetType();
-            AddService(serviceType, serviceInstance);
-        }
-
-        public void AddService(MonoBehaviour serviceInstance)
         {
             if (serviceInstance == null)
                 throw new ArgumentNullException(nameof(serviceInstance));
