@@ -1,47 +1,48 @@
 ﻿using System;
-using System.Reflection;
-using UnityEngine;
 using System.Linq;
+using System.Reflection;
+using Serjbal.App.MVP;
+using UnityEngine;
 
-namespace Serjbal.App.MVVM
+namespace Serjbal.App
 {
-    public static class FieldsInjector
+    public class FieldsInjector
     {
-        public static void Inject(IViewable viewInstance, IViewModel viewModelInstance)
+        public void Inject(object from, object to)
         {
-            if (viewInstance == null)
-                throw new ArgumentNullException(nameof(viewInstance));
-            if (viewModelInstance == null)
-                throw new ArgumentNullException(nameof(viewModelInstance));
+            if (from == null)
+                throw new ArgumentNullException(nameof(from));
+            if (to == null)
+                throw new ArgumentNullException(nameof(to));
 
 
-            FieldInfo[] vmFields = GetFields(viewModelInstance);
+            FieldInfo[] vmFields = GetFields(to);
             var vmAttributes = vmFields.Select(x => GetDataAttribute(x)).ToArray();
 
             var vmTypeData = new TypeData
             {
-                instance = viewModelInstance,
+                instance = to,
                 fields = vmFields,
                 attributes = vmAttributes
             };
 
 
-            FieldInfo[] viewFields = GetFields(viewInstance);
+            FieldInfo[] viewFields = GetFields(from);
             foreach (var viewField in viewFields)
             {
                 var dataAttribute = GetDataAttribute(viewField);
                 if (dataAttribute == null) continue;
 
-                object viewFieldValue = viewField.GetValue(viewInstance);
+                object viewFieldValue = viewField.GetValue(from);
                 if (viewFieldValue == null) continue;
 
-                FieldData viewTypeData = GetViewTypeData(viewInstance, viewField, dataAttribute);
+                FieldData viewTypeData = GetViewTypeData(from, viewField, dataAttribute);
 
                 InjectIntoViewModel(vmTypeData, viewTypeData);
             }
         }
 
-        private static FieldData GetViewTypeData(IViewable viewInstance, FieldInfo viewField, DataAttribute dataAttribute)
+        private static FieldData GetViewTypeData(object viewInstance, FieldInfo viewField, DataAttribute dataAttribute)
         {
             return new FieldData
             {
@@ -65,7 +66,7 @@ namespace Serjbal.App.MVVM
                     try
                     {
                         vmField.SetValue(vmTypeData.instance, viewFieldData.value);
-                        Debug.Log($"Successfully injected field '{viewFieldData.dataKey}' from View to ViewModel");
+                        // Debug.Log($"Successfully injected field '{viewFieldData.dataKey}' from View to ViewModel");
                         break;
                     } catch (Exception ex)
                     {

@@ -1,53 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using Serjbal.App.MVP;
 using System;
-using System.Linq;
-using UnityEngine;
-using Serjbal.App.MVVM;
 
 namespace Serjbal.App
 {
-    public class PageFactory : IFactory<PageName, IViewable>
+    public sealed class PageFactory : IFactory<PageName, IPresenter>
     {
-        Dictionary<PageName, PageConfig> _prefabs = new Dictionary<PageName, PageConfig>();
         private Canvases _canvases;
+        private PrefabsLoader _prefabsLoader;
+        private FieldsInjector _viewInjector = new FieldsInjector();
 
-        public PageFactory(PageConfig[] prefabs, Canvases canvases)
+        public PageFactory(PrefabsLoader viewPrefabsLoader, Canvases canvases)
         {
             _canvases = canvases;
-            _prefabs = prefabs.ToDictionary(x => x.Name, x => x);
+            _prefabsLoader = viewPrefabsLoader;
         }
 
-        public IViewable Create(PageName pageName)
+        public IPresenter Create(PageName pageName)
         {
-            var config = _prefabs[pageName];
-            IViewable viewInstance = CreateViewInstance(config);
-            IViewModel viewModelInstance = CreateViewModelInstance(config, viewInstance.GameObject);
-            FieldsInjector.Inject(viewInstance, viewModelInstance);
+            var strName = pageName.ToString();
+            GameObject prefab = _prefabsLoader.Load(strName).gameObject;
+            GameObject instance = GameObject.Instantiate(prefab, _canvases.DynamicCanvas.transform);
+            instance.name = strName;
 
-            return viewInstance;
-        }
-
-        private IViewModel CreateViewModelInstance(PageConfig config, GameObject gameObject)
-        {
-            var classType = config.ViewModel.GetClass();
-
-            if (typeof(MonoBehaviour).IsAssignableFrom(classType))
+            var view = instance.GetComponent<IView>();
+            var presenter = instance.GetComponent<IPresenter>();
+            if (view == null || presenter == null)
             {
-                return gameObject.AddComponent(classType) as IViewModel;
-            } else
-            {
-                return Activator.CreateInstance(classType) as IViewModel;
+                Debug.LogError($"The page {strName} is have no View or Presenter component");
+                return null;
             }
-        }
+            _viewInjector.Inject(view, presenter);
 
-        private IViewable CreateViewInstance(PageConfig config)
-        {
-            var canvas = config.Type == PageType.Dynamic
-                            ? _canvases.DynamicCanvas
-                            : _canvases.StaticCanvas;
-
-            IViewable newPage = Factorys.Create<IViewable>(config.Name.ToString(), config.View, canvas.transform);
-            return newPage;
+            return presenter;
         }
     }
 }

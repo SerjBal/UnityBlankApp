@@ -1,8 +1,8 @@
 using TMPro;
 
-namespace Serjbal.App.MVVM
+namespace Serjbal.App.MVP
 {
-    public class ErrorPage : Page, IViewable
+    public class ErrorPage : Page, IView
     {
         public TextMeshProUGUI errorText;
     }

@@ -8,7 +8,7 @@
         QuitGamePopup
     }
 
-    public enum PageType
+    public enum CanvasType
     {
         Static,
         Dynamic

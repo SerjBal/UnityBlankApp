@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using Serjbal.App.MVVM;
+using Serjbal.App.MVP;
 
 namespace Serjbal.App
 {
@@ -18,9 +18,9 @@ namespace Serjbal.App
             throw new InvalidOperationException($"{prefab.name} is missing component {typeof(T)}");
         }
 
-        public static IFactory<PageName, IViewable> CreatePageFactory(PageConfig[] prefabs, Canvases canvases)
+        public static IFactory<PageName, IPresenter> CreatePageFactory(PrefabsLoader _viewPrefabsLoader, Canvases canvases)
         {
-            return new PageFactory(prefabs, canvases);
+            return new PageFactory(_viewPrefabsLoader, canvases);
         }
     }
 }

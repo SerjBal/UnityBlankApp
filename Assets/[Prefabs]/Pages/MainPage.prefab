@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 4301511474261174925}
   - component: {fileID: 64126712979318042}
   - component: {fileID: 1300468588435292547}
+  - component: {fileID: -4636600464906531505}
   m_Layer: 5
   m_Name: MainPage
   m_TagString: Untagged
@@ -227,6 +228,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.UI.MainPage
   _text: {fileID: 7495477235393894569}
+--- !u!114 &-4636600464906531505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663531172606976917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a8e27591dea40f0b477fc8b91d4e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.MVP.PresenterSample
 --- !u!1 &6224701112290290182
 GameObject:
   m_ObjectHideFlags: 0

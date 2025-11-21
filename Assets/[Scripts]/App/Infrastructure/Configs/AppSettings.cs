@@ -6,8 +6,5 @@ namespace Serjbal.App
     public class AppSettings : ScriptableObject
     {
         public AppSettingsModel config;
-
-        [Header("UI")]
-        public UISettings uiSettings;
     }
 }

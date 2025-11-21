@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 
-namespace Serjbal.App.MVVM
+namespace Serjbal.App.MVP
 {
     [CreateAssetMenu]
-    public class BaseViewModelCopy : MonoViewModel, IViewModel
+    public class PresenterSample : MonoBehaviour, IPresenter
     {
         [Data("Text")]
         private TMPro.TextMeshProUGUI _text;
+        private App _app;
+
+        public void Init(App app)
+        {
+            _app = app;
+        }
 
         private void Start()
         {

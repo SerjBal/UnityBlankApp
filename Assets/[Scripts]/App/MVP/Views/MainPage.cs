@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Serjbal.App.MVVM
+namespace Serjbal.App.MVP
 {
-    public class MainPage : Page, IViewable
+    public class MainPage : Page, IView
     {
         [Data("Text")]
         [SerializeField] TMPro.TextMeshProUGUI _text;

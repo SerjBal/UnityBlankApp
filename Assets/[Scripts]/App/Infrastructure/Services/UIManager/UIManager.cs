@@ -1,23 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using Serjbal.App.MVVM;
+using Serjbal.App.MVP;
 
 namespace Serjbal.App
 {
     public sealed class UIManager : MonoBehaviour, IService
     {
         [SerializeField] Canvases _canvases;
-        IFactory<PageName, IViewable> _pagesFactory;
+        [SerializeField] PrefabsLoader _viewPrefabsLoader;
+        IFactory<PageName, IPresenter> _pagesFactory;
         AppSettingsModel _settingsModel;
-        readonly Dictionary<PageName, IViewable> _openedPages = new Dictionary<PageName, IViewable>();
+        readonly Dictionary<PageName, GameObject> _openedPages = new Dictionary<PageName, GameObject>();
 
         [InjectDependency] App _app;
 
 
         public void Init()
         {
-            _pagesFactory = Factorys.CreatePageFactory(_app.Settings.uiSettings.Prefabs, _canvases);
+            _pagesFactory = Factorys.CreatePageFactory( _viewPrefabsLoader, _canvases);
             _app.EventBus.Subscribe<OnSettingsLoadedEvent>(UpdateSettingsModel);
         }
 
@@ -28,34 +29,38 @@ namespace Serjbal.App
 
         public void ShowPage(PageName pageType)
         {
-            GetPage(pageType).Show();
+            GetPage(pageType).SetActive(true);
         }
 
         public void ClosePage(PageName pageType)
         {
-            GetPage(pageType).Close();
+            var page = GetPage(pageType);
+            _openedPages[pageType] = null;
+            Destroy(page);
         }
 
-        public IViewable GetPage(PageName pageType)
+        public GameObject GetPage(PageName pageType)
         {
             if (!_openedPages.ContainsKey(pageType))
             {
                 var newPage = _pagesFactory.Create(pageType);
-                _openedPages.Add(pageType, newPage);
-                return newPage;
+                newPage.Init(_app);
+                _openedPages.Add(pageType, newPage.gameObject);
+                return newPage.gameObject;
             }
 
             if (_openedPages[pageType] == null)
             {
                 var newPage = _pagesFactory.Create(pageType);
-                _openedPages[pageType] = newPage;
-                return newPage;
+                newPage.Init(_app);
+                _openedPages[pageType] = newPage.gameObject;
+                return newPage.gameObject;
             }
 
             return _openedPages[pageType];
         }
 
-        public bool IsPageExist(PageName pageType, out IViewable page)
+        public bool IsPageExist(PageName pageType, out GameObject page)
         {
             page = null;
             bool has = _openedPages.ContainsKey(pageType);

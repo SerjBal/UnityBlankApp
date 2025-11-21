@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Serjbal.App.MVVM
+namespace Serjbal.App.MVP
 {
-    public class Page : MonoBehaviour, IViewable
+    public class Page : MonoBehaviour, IView
     {
         public GameObject GameObject => gameObject;
 

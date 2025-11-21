@@ -1,5 +1,5 @@
 ﻿
-namespace Serjbal.App.MVVM
+namespace Serjbal.App.MVP
 {
     public class LoaderProgressBar : Page
     {
