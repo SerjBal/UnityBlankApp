@@ -1,7 +1,6 @@
 # UnityBlankApp 🏗️
 
-Архитектурный шаблон для Unity, реализующий чистую архитектуру.
-Шаблон предназначен для расширения и настройки под конкретные нужды проектов.
+Мощный и легковесный архитектурный шаблон для Unity, реализующий чистую архитектуру, поддержку MVVM и другие современные подходы разработки.
 
 ## ✨ Особенности
 
@@ -101,35 +100,3 @@ public class GameplayState : IState
 }
 ```
 
-## 🛠️ Основные компоненты
-
-### AppBuilder
-
-fluent-подобный строитель приложения:
-
-```csharp
-var app = new AppBuilder()
-    .SetAppSettings(settings)
-    .SetStateMachine(customStateMachine)
-    .SetServiceContainer(customContainer)
-    .Build();
-```
-
-### ServiceContainer
-
-Легковесный DI-контейнер:
-
-```csharp
-// Регистрация
-serviceContainer.AddService<ISceneService>(new SceneSys());
-
-// Получение
-var sceneService = serviceContainer.GetService<ISceneService>();
-```
-
-### StateMachine
-
-```csharp
-_stateMachine.AddState(new InjectAppToServicesState(_app, _appInjector));
-_stateMachine.SwitchToState<InitAppServicesState>().Execute();
-```
