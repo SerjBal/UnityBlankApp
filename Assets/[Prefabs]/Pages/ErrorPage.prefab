@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 4301511474261174925}
   - component: {fileID: 64126712979318042}
   - component: {fileID: 8135790838670106875}
+  - component: {fileID: -630309909503004966}
   m_Layer: 5
   m_Name: ErrorPage
   m_TagString: Untagged
@@ -496,3 +497,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   errorText: {fileID: 366761882351385701}
+--- !u!114 &-630309909503004966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663531172606976917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a8e27591dea40f0b477fc8b91d4e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.MVP.PresenterSample

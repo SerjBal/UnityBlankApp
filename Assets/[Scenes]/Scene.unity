@@ -128,7 +128,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52043619}
+  - component: {fileID: 52043622}
   - component: {fileID: 52043620}
+  - component: {fileID: 52043621}
   m_Layer: 5
   m_Name: '[Canvas]'
   m_TagString: Untagged
@@ -171,6 +173,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Serjbal.Canvases
   StaticCanvas: {fileID: 783731374}
   DynamicCanvas: {fileID: 2014231031}
+--- !u!114 &52043621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52043618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12809805c7a874583919c7e4492f9183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.PagesPrefLoader
+  _prefabs:
+  - {fileID: 64126712979318042, guid: 4e1e6b863b339441da97f44c31d31193, type: 3}
+  - {fileID: 64126712979318042, guid: 27cd9e2ecc27a483f89eadc3c3f5a920, type: 3}
+--- !u!114 &52043622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52043618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f125b05192744a67aacfb6ccaa57c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.UIService
+  _canvases: {fileID: 52043620}
+  _viewPrefabsLoader: {fileID: 52043621}
 --- !u!1 &60534585
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +245,6 @@ GameObject:
   m_Component:
   - component: {fileID: 220967623}
   - component: {fileID: 220967625}
-  - component: {fileID: 220967624}
   m_Layer: 0
   m_Name: '[System]'
   m_TagString: Untagged
@@ -237,19 +267,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &220967624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220967621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f125b05192744a67aacfb6ccaa57c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Serjbal.App.UIService
-  _canvases: {fileID: 52043620}
 --- !u!114 &220967625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Serjbal.AppEnter
   _settings: {fileID: 11400000, guid: 6ccb0d70d640445918d7b2538b853ad7, type: 2}
   _staticServices:
-  - {fileID: 220967624}
+  - {fileID: 52043622}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +295,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: '[Main Camera]'
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,7 +373,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 638962956}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -638,7 +655,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 330585546}
   - {fileID: 60534586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -912,4 +928,5 @@ SceneRoots:
   - {fileID: 220967623}
   - {fileID: 52043619}
   - {fileID: 638962956}
+  - {fileID: 330585546}
   - {fileID: 337855407}
